@@ -14,15 +14,12 @@ from sklearn.model_selection import train_test_split
 X = input['headline']#.append(df['headline'])
 Y = input['is_sarcastic']#.append(df['is_sarcastic'])
 
-xTrain, xTest, yTrain, yTest = train_test_split(X, Y, test_size=0.01, random_state=42)
+xTrain, xTest, yTrain, yTest = train_test_split(X, Y, test_size=0.2, random_state=42)
 classifiers = [
-    # Pipeline([('tfidf', TfidfVectorizer()), ('classifier', LinearSVC())]),
+    Pipeline([('tfidf', TfidfVectorizer()), ('classifier', LinearSVC())]),
     Pipeline([('tfidf', TfidfVectorizer()), ('classifier', MLPClassifier(hidden_layer_sizes=(90,90), random_state=42, solver='lbfgs'))]),
-    Pipeline([('tfidf', TfidfVectorizer()), ('classifier', MLPClassifier(hidden_layer_sizes=(20,20), random_state=42, solver='lbfgs'))]),
-    Pipeline([('tfidf', TfidfVectorizer()), ('classifier', MLPClassifier(hidden_layer_sizes=(150,150, 150), random_state=42, solver='lbfgs'))]),
-        Pipeline([('tfidf', TfidfVectorizer()), ('classifier', MLPClassifier(hidden_layer_sizes=(80,90, 100, 90, 80), random_state=42, solver='lbfgs'))]),
-    # Pipeline([('tfidf', TfidfVectorizer()), ('classifier', RandomForestClassifier())]),
-    # Pipeline([('tfidf', TfidfVectorizer()), ('classifier', KNeighborsClassifier(n_neighbors=2))]),
+    Pipeline([('tfidf', TfidfVectorizer()), ('classifier', RandomForestClassifier())]),
+    Pipeline([('tfidf', TfidfVectorizer()), ('classifier', KNeighborsClassifier(n_neighbors=2))]),
     ]
 
 for classifier in classifiers:
